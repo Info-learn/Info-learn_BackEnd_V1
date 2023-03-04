@@ -7,7 +7,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.7.5")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.7.4")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.41")
         classpath("org.jetbrains.kotlin:kotlin-allopen:1.7.20")
     }
@@ -17,7 +17,7 @@ buildscript {
 
 plugins {
     kotlin("jvm") version("1.7.20")
-    id("org.springframework.boot") version("2.7.5")
+    id("org.springframework.boot") version("2.7.4")
     kotlin("plugin.spring") version("1.6.21")
     kotlin("plugin.jpa") version("1.6.21")
 }
