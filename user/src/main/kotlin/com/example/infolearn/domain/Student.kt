@@ -14,11 +14,13 @@ import javax.validation.constraints.Min
 @DiscriminatorValue("student")
 @OnDelete(action = OnDeleteAction.CASCADE)
 class Student(
+    id: Long?,
     name: String,
     accountId: String,
     password: String,
     studentId: Int
 ): User(
+    id,
     name,
     accountId,
     password,
