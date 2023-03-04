@@ -11,10 +11,12 @@ import javax.persistence.Entity
 @DiscriminatorValue("teacher")
 @OnDelete(action = OnDeleteAction.CASCADE)
 class Teacher(
+    id: Long?,
     name: String,
     accountId: String,
     password: String
 ): User(
+    id,
     name,
     accountId,
     password,
