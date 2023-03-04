@@ -12,11 +12,11 @@ import javax.validation.constraints.Size
 @DiscriminatorColumn(name = "user_type")
 @Entity(name = "user")
 abstract class User(
+    id: Long?,
     name: String,
     accountId: String,
     password: String,
-    role: Role,
-    id: Long? = null
+    role: Role
 ) {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = id
@@ -38,7 +38,7 @@ abstract class User(
     var roleList: MutableList<Role> = ArrayList()
         protected set
 
-    @Column(name = "is_expelled")
+    @Column(name = "is_expelled", nullable = false)
     var isExpelled: Boolean = false
         protected set
 
