@@ -2,8 +2,8 @@ package com.example.infolearn.adapter.`in`.web
 
 import com.example.infolearn.adapter.`in`.web.dto.request.LoadUserByNameOrAccountIdDto
 import com.example.infolearn.adapter.`in`.web.dto.request.Type
-import com.example.infolearn.adapter.`in`.web.dto.response.UserResponse
-import com.example.infolearn.application.port.`in`.LoadUserUseCase
+import com.example.infolearn.adapter.`in`.web.dto.response.UserDetailsResponse
+import com.example.infolearn.application.port.`in`.LoadUserDetailsResponseUseCase
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -15,23 +15,23 @@ import javax.validation.Valid
 @RequestMapping("user")
 @Validated
 class UserWebAdapter(
-    private val loadUserUseCase: LoadUserUseCase
+    private val loadUserDetailsResponseUseCase: LoadUserDetailsResponseUseCase
 ) {
 
     @GetMapping("load")
     fun loadUserByNameOrAccountId(
         @RequestBody @Valid
         req: LoadUserByNameOrAccountIdDto
-    ): UserResponse{
+    ): UserDetailsResponse{
 
         return when (req.type) {
 
             Type.ACCOUNT_ID -> {
-                loadUserUseCase.loadUserResponseByAccountId(req.text)
+                loadUserDetailsResponseUseCase.loadUserDetailsResponseByAccountId(req.text)
             }
 
             Type.NAME -> {
-                loadUserUseCase.loadUserResponseByName(req.text)
+                loadUserDetailsResponseUseCase.loadUserDetailsResponseByName(req.text)
             }
         }
 

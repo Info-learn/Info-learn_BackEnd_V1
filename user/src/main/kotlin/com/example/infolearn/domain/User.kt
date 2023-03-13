@@ -1,6 +1,6 @@
 package com.example.infolearn.domain
 
-import com.example.infolearn.adapter.`in`.web.dto.response.UserResponse
+import com.example.infolearn.adapter.`in`.web.dto.response.UserDetailsResponse
 import com.example.infolearn.user.Role
 import org.hibernate.annotations.SQLDelete
 import org.hibernate.annotations.Where
@@ -47,7 +47,7 @@ abstract class User(
         this.roleList.add(role)
     }
 
-    fun toUserResponse() = UserResponse(
+    fun toUserDetailsResponse() = UserDetailsResponse(
         this.id!!,
         this.name,
         this.accountId
