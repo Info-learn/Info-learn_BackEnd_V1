@@ -16,3 +16,19 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt:0.9.1")
 
 }
+
+allOpen{
+    annotation("jakarta.persistence.Entity")
+    annotation("com.example.global.annotation.UseCase")
+    annotation("jakarta.persistence.MappedSuperclass")
+    annotation("org.springframework.data.redis.core.RedisHash")
+    annotation("jakarta.persistence.Embeddable")
+}
+
+noArg{
+    annotation("jakarta.persistence.Entity")
+    annotation("com.example.global.annotation.UseCase")
+    annotation("jakarta.persistence.MappedSuperclass")
+    annotation("org.springframework.data.redis.core.RedisHash")
+    annotation("jakarta.persistence.Embeddable")
+}
