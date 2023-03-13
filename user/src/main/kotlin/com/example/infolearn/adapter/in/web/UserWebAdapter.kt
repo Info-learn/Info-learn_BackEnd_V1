@@ -1,9 +1,9 @@
 package com.example.infolearn.adapter.`in`.web
 
 import com.example.infolearn.adapter.`in`.web.dto.request.LoadUserByNameOrAccountIdDto
-import com.example.infolearn.adapter.`in`.web.dto.request.Type
-import com.example.infolearn.adapter.`in`.web.dto.response.UserDetailsResponse
-import com.example.infolearn.application.port.`in`.LoadUserDetailsResponseUseCase
+import com.example.infolearn.application.port.`in`.LoadUserUseCase
+import com.example.infolearn.exception.BusinessException
+import com.example.infolearn.exception.ErrorCode
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -15,7 +15,7 @@ import javax.validation.Valid
 @RequestMapping("user")
 @Validated
 class UserWebAdapter(
-    private val loadUserDetailsResponseUseCase: LoadUserDetailsResponseUseCase
+    private val loadUserUseCase: LoadUserUseCase
 ) {
 
     @GetMapping("load")
@@ -23,18 +23,11 @@ class UserWebAdapter(
 
         @RequestBody @Valid
         req: LoadUserByNameOrAccountIdDto
-    ): UserDetailsResponse{
-
-        return when (req.type) {
-
-            Type.ACCOUNT_ID -> {
-                loadUserDetailsResponseUseCase.loadUserDetailsResponseByAccountId(req.text)
-            }
-
-            Type.NAME -> {
-                loadUserDetailsResponseUseCase.loadUserDetailsResponseByName(req.text)
-            }
-        }
-
-    }
+    ) = (
+            loadUserUseCase.load(req.text, req.type)
+                ?: throw BusinessException(
+                    "User Not Found",
+                    ErrorCode.PERSISTENCE_DATA_NOT_FOUND_ERROR
+                )
+            ).toUserDetailsResponse()
 }
