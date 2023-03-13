@@ -20,6 +20,7 @@ class UserWebAdapter(
 
     @GetMapping("load")
     fun loadUserByNameOrAccountId(
+
         @RequestBody @Valid
         req: LoadUserByNameOrAccountIdDto
     ): UserDetailsResponse{
